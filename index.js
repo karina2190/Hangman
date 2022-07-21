@@ -8,7 +8,7 @@ document.getElementById("add").onclick = function() {
         myWord = text;
         for (var i = 0; i < text.length; ++i) {
             mysteriousWord += '_';
-            mysteriousWord += " ";
+            //mysteriousWord += " ";
         }
         var li = "<li>" + mysteriousWord + "</li>";
         document.getElementById("list").innerHTML += li;
@@ -18,10 +18,12 @@ document.getElementById("add").onclick = function() {
 }
 
 document.getElementById("enter").onclick = function() {
-    var letter = document.getElementById("input2").value; 
+    var letter = document.getElementById("input2").value;
     for (var i = 0; i < myWord.length; ++i) {
         if (myWord[i] == letter) {
-            
+            alert(mysteriousWord[i]);
+            mysteriousWord = mysteriousWord.replaceAt(i, 'c');
+            alert(mysteriousWord);
         }
     }
     var li = "<li>" + mysteriousWord + "</li>";

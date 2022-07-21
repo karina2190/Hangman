@@ -21,10 +21,9 @@ document.getElementById("enter").onclick = function() {
     var letter = document.getElementById("input2").value; 
     for (var i = 0; i < myWord.length; ++i) {
         if (myWord[i] == letter) {
-            alert(mysteriousWord.replaceAt(i + 1, letter));
+            
         }
     }
-    alert(mysteriousWord);
     var li = "<li>" + mysteriousWord + "</li>";
     document.getElementById("list").innerHTML += li;
     document.getElementById("input2").value = "";

@@ -1,6 +1,7 @@
 var mysteriousWord = new String();
 var index = 0;
 var myWord = new String();
+var mistakes = 0;
 
 document.getElementById("add").onclick = function() {
     if (index == 0) {
@@ -17,16 +18,31 @@ document.getElementById("add").onclick = function() {
     }
 }
 
-document.getElementById("enter").onclick = function() {
-    var letter = document.getElementById("input2").value;
-    for (var i = 0; i < myWord.length; ++i) {
-        if (myWord[i] == letter) {
-            alert(mysteriousWord[i]);
-            mysteriousWord = mysteriousWord.replaceAt(i, 'c');
-            alert(mysteriousWord);
-        }
-    }
-    var li = "<li>" + mysteriousWord + "</li>";
-    document.getElementById("list").innerHTML += li;
-    document.getElementById("input2").value = "";
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
+
+document.getElementById("enter").onclick = function() {
+    let letter = document.getElementById("input2").value;
+    if (mistakes < 15) {
+        var ok = 0;
+        if (letter != "" && letter.length == 1) {
+            for (var i = 0; i < myWord.length; ++i) {
+                if (myWord[i].localeCompare(letter) == 0) {
+                    ok = 1;
+                    mysteriousWord = mysteriousWord.replaceAt(i, letter); // He!!o World
+                }
+            }
+            if (ok == 0) {
+                ++mistakes;
+            }
+            var li = "<li>" + mysteriousWord + "</li>";
+            document.getElementById("list").innerHTML += li;
+            document.getElementById("input2").value = "";
+        }
+    } else {
+        alert('You lost!');
+    }
+}
+
+

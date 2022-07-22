@@ -24,13 +24,13 @@ String.prototype.replaceAt = function(index, replacement) {
 
 document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
-    if (mistakes < 15) {
+    if (mistakes < 7) {
         var ok = 0;
         if (letter != "" && letter.length == 1) {
             for (var i = 0; i < myWord.length; ++i) {
                 if (myWord[i].localeCompare(letter) == 0) {
                     ok = 1;
-                    mysteriousWord = mysteriousWord.replaceAt(i, letter); // He!!o World
+                    mysteriousWord = mysteriousWord.replaceAt(i, letter);
                 }
             }
             if (ok == 0) {
@@ -39,6 +39,9 @@ document.getElementById("enter").onclick = function() {
             var li = "<li>" + mysteriousWord + "</li>";
             document.getElementById("list").innerHTML += li;
             document.getElementById("input2").value = "";
+            if (mysteriousWord.localeCompare(myWord) == 0) {
+                alert('You win!');
+            }
         }
     } else {
         alert('You lost!');

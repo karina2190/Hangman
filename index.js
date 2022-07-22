@@ -48,7 +48,7 @@ document.getElementById("enter").onclick = function() {
                     }
                 }
                 if (isThisTheWord) {
-                    alert('You win!');
+                    alert('Congratulations!');
                 }
             }
         } else if (letter.length > 1) {
@@ -60,7 +60,7 @@ document.getElementById("enter").onclick = function() {
                 }
             }
             if (correctWord) {
-                alert('You win!');
+                alert('Congratulations!');
                 var li = "<li>" + myWord+ "</li>";
                 document.getElementById("list").innerHTML += li;
                 document.getElementById("input2").value = "";

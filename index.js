@@ -9,7 +9,7 @@ document.getElementById("add").onclick = function() {
         myWord = text;
         for (var i = 0; i < text.length; ++i) {
             mysteriousWord += '_';
-            //mysteriousWord += " ";
+            mysteriousWord += " ";
         }
         var li = "<li>" + mysteriousWord + "</li>";
         document.getElementById("list").innerHTML += li;
@@ -25,29 +25,50 @@ String.prototype.replaceAt = function(index, replacement) {
 document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
     if (mistakes < 8) {
-        var ok = 0;
+        var foundLetter = 0;
         if (letter != "" && letter.length == 1) {
             for (var i = 0; i < myWord.length; ++i) {
                 if (myWord[i].localeCompare(letter) == 0) {
-                    ok = 1;
-                    mysteriousWord = mysteriousWord.replaceAt(i, letter);
+                    foundLetter = 1;
+                    mysteriousWord = mysteriousWord.replaceAt(i * 2, letter);
                 }
             }
-            if (ok == 0) {
+            if (foundLetter == 0) {
                 document.getElementById("input2").value = "";
-                changeImage(mistakes);
                 ++mistakes;
+                changeImage(mistakes);
             } else {
                 var li = "<li>" + mysteriousWord + "</li>";
                 document.getElementById("list").innerHTML += li;
                 document.getElementById("input2").value = "";
-                if (mysteriousWord.localeCompare(myWord) == 0) {
+                var isThisTheWord = 1;
+                for (var i = 0; i < myWord.length; ++i) {
+                    if (mysteriousWord[i * 2].localeCompare(myWord[i]) != 0) {
+                        isThisTheWord = 0;
+                    }
+                }
+                if (isThisTheWord) {
                     alert('You win!');
                 }
             }
+        } else if (letter.length > 1) {
+            var correctWord= 1;
+            for (var i = 0; i < myWord.length; ++i) {
+                if (letter[i].localeCompare(myWord[i]) != 0) {
+                    alert
+                    correctWord = 0;
+                }
+            }
+            if (correctWord) {
+                alert('You win!');
+                var li = "<li>" + myWord+ "</li>";
+                document.getElementById("list").innerHTML += li;
+                document.getElementById("input2").value = "";
+            } else {
+                mistakes = 7;
+                changeImage(mistakes);
+            }
         }
-    } else {
-        //alert('You lost!');
     }
 }
 
@@ -66,6 +87,9 @@ function changeImage(mistakes) {
         document.getElementById("imgClickAndChange").src = "seven.jpg";
     } else if (mistakes == 7) {
         document.getElementById("imgClickAndChange").src = "eight.jpg";
-        alert('You lost!');
+        alert('You lose!');
+        var li = "<li>" + myWord + ' - this was your word...' + "</li>";
+        document.getElementById("list").innerHTML += li;
+        document.getElementById("input2").value = "";
     }
 }

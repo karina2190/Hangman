@@ -24,7 +24,7 @@ String.prototype.replaceAt = function(index, replacement) {
 
 document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
-    if (mistakes < 15) {
+    if (mistakes < 8) {
         var ok = 0;
         if (letter != "" && letter.length == 1) {
             for (var i = 0; i < myWord.length; ++i) {
@@ -47,7 +47,7 @@ document.getElementById("enter").onclick = function() {
             }
         }
     } else {
-        alert('You lost!');
+        //alert('You lost!');
     }
 }
 
@@ -66,5 +66,6 @@ function changeImage(mistakes) {
         document.getElementById("imgClickAndChange").src = "seven.jpg";
     } else if (mistakes == 7) {
         document.getElementById("imgClickAndChange").src = "eight.jpg";
+        alert('You lost!');
     }
 }

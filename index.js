@@ -87,7 +87,7 @@ function changeImage(mistakes) {
         document.getElementById("imgClickAndChange").src = "seven.jpg";
     } else if (mistakes == 7) {
         document.getElementById("imgClickAndChange").src = "eight.jpg";
-        alert('You lose!');
+        alert('You lost!');
         var li = "<li>" + myWord + ' - this was your word...' + "</li>";
         document.getElementById("list").innerHTML += li;
         document.getElementById("input2").value = "";

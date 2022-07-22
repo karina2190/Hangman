@@ -24,7 +24,7 @@ String.prototype.replaceAt = function(index, replacement) {
 
 document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
-    if (mistakes < 7) {
+    if (mistakes < 15) {
         var ok = 0;
         if (letter != "" && letter.length == 1) {
             for (var i = 0; i < myWord.length; ++i) {
@@ -34,13 +34,16 @@ document.getElementById("enter").onclick = function() {
                 }
             }
             if (ok == 0) {
+                document.getElementById("input2").value = "";
+                changeImage(mistakes);
                 ++mistakes;
-            }
-            var li = "<li>" + mysteriousWord + "</li>";
-            document.getElementById("list").innerHTML += li;
-            document.getElementById("input2").value = "";
-            if (mysteriousWord.localeCompare(myWord) == 0) {
-                alert('You win!');
+            } else {
+                var li = "<li>" + mysteriousWord + "</li>";
+                document.getElementById("list").innerHTML += li;
+                document.getElementById("input2").value = "";
+                if (mysteriousWord.localeCompare(myWord) == 0) {
+                    alert('You win!');
+                }
             }
         }
     } else {
@@ -48,4 +51,20 @@ document.getElementById("enter").onclick = function() {
     }
 }
 
-
+function changeImage(mistakes) {
+    if (mistakes == 1) {
+        document.getElementById("imgClickAndChange").src = "second.jpg";
+    } else if (mistakes == 2) {
+        document.getElementById("imgClickAndChange").src = "third.jpg";
+    } else if (mistakes == 3) {
+        document.getElementById("imgClickAndChange").src = "four.jpg";
+    } else if (mistakes == 4) {
+        document.getElementById("imgClickAndChange").src = "five.jpg";
+    } else if (mistakes == 5) {
+        document.getElementById("imgClickAndChange").src = "six.jpg";
+    } else if (mistakes == 6) {
+        document.getElementById("imgClickAndChange").src = "seven.jpg";
+    } else if (mistakes == 7) {
+        document.getElementById("imgClickAndChange").src = "eight.jpg";
+    }
+}

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body {
+          background-image: url('img_girl.jpg');
+        }
+        </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -9,7 +14,11 @@
 
 <body style="background-color:turquoise;">
     <h1 align="center" font-size: 300%>Hangman</h1>
-    <div>
+    <figure class="figure">
+        <img src="first.jpg" class="figure-img img-fluid rounded" alt="" id="imgClickAndChange">
+        <figcaption class="figure-caption text-end">Don't let this man die!:(</figcaption>
+      </figure>
+      <hr>
         <div>
             <div>
                 <label>The word to be guessed</label>
@@ -27,8 +36,6 @@
                 <input type='button' value='enter' id='enter' />
             </div>
           </div>
-    </div>
-    <img src=”https://64.media.tumblr.com/4878b7353a582a54c4b855f8c4f350c5/tumblr_inline_pg0k73U7BJ1rh6ctt_500.png” alt=”Image” height=”(your image height)” width=”(your image width)”>.
-    <script src="index.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

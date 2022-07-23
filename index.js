@@ -14,6 +14,7 @@ document.getElementById("add").onclick = function() {
             mysteriousWord += " ";
         }
         document.getElementById("paragraph").innerHTML = mysteriousWord;
+        document.getElementById("input").value = "";
     }
 }
 
@@ -61,11 +62,14 @@ document.getElementById("enter").onclick = function() {
                 }
             }
         } else if (letter.length > 1) {
-            var correctWord= 1;
-            for (var i = 0; i < myWord.length; ++i) {
-                if (letter[i].localeCompare(myWord[i]) != 0) {
-                    alert
-                    correctWord = 0;
+            var correctWord = 1;
+            if (letter.length != myWord.length) {
+                correctWord = 0;
+            } else {
+                for (var i = 0; i < myWord.length; ++i) {
+                    if (letter[i].localeCompare(myWord[i]) != 0) {
+                        correctWord = 0;
+                    }
                 }
             }
             if (correctWord) {

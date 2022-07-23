@@ -32,7 +32,7 @@ document.getElementById("enter").onclick = function() {
     if (letterInsideArray == 0 && letter.length == 1) {
         wordLetters[letterIndex] = letter;
         ++letterIndex;
-        document.getElementById("letters").innerHTML = wordLetters;
+        document.getElementById("letters").innerHTML = 'These are the letters you used: ' + wordLetters;
     }
     if (mistakes < 8) {
         var foundLetter = 0;

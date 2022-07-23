@@ -2,6 +2,8 @@ var mysteriousWord = new String();
 var index = 0;
 var myWord = new String();
 var mistakes = 0;
+const wordLetters = [];
+var letterIndex = 0;
 
 document.getElementById("add").onclick = function() {
     if (index == 0) {
@@ -21,6 +23,17 @@ String.prototype.replaceAt = function(index, replacement) {
 
 document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
+    var letterInsideArray = 0;
+    for (var i = 0; i < letterIndex; ++i) {
+        if (letter.localeCompare(wordLetters[i]) == 0) {
+            letterInsideArray = 1;
+        }
+    }
+    if (letterInsideArray == 0 && letter.length == 1) {
+        wordLetters[letterIndex] = letter;
+        ++letterIndex;
+        document.getElementById("letters").innerHTML = wordLetters;
+    }
     if (mistakes < 8) {
         var foundLetter = 0;
         if (letter != "" && letter.length == 1) {

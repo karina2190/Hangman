@@ -22,8 +22,63 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
 
-document.getElementById("enter").onclick = function() {
-    let letter = document.getElementById("input2").value;
+function longerWord(letter) {
+    var correctWord = 1;
+    if (letter.length != myWord.length) {
+        correctWord = 0;
+    } else {
+        for (var i = 0; i < myWord.length; ++i) {
+            if (letter[i].localeCompare(myWord[i]) != 0) {
+                correctWord = 0;
+            }
+        }
+    }
+    if (correctWord) {
+        alert('Congratulations!');
+        document.getElementById("paragraph").innerHTML = myWord;
+        document.getElementById("input2").value = "";
+    } else {
+        mistakes = 7;
+        changeImage(mistakes);
+    }
+}
+
+function isTheLetterFound(foundLetter) {
+    if (foundLetter == 0) {
+        document.getElementById("input2").value = "";
+        ++mistakes;
+        changeImage(mistakes);
+    } else {
+        document.getElementById("paragraph").innerHTML = mysteriousWord;
+        document.getElementById("input2").value = "";
+        var isThisTheWord = 1;
+        for (var i = 0; i < myWord.length; ++i) {
+            if (mysteriousWord[i * 2].localeCompare(myWord[i]) != 0) {
+                isThisTheWord = 0;
+            }
+        }
+        if (isThisTheWord) {
+            alert('Congratulations!');
+        }
+    }
+}
+
+function replacement(letter) {
+    var foundLetter = 0;
+    if (letter != "" && letter.length == 1) {
+        for (var i = 0; i < myWord.length; ++i) {
+            if (myWord[i].localeCompare(letter) == 0) {
+                foundLetter = 1;
+                mysteriousWord = mysteriousWord.replaceAt(i * 2, letter);
+            }
+        }
+        isTheLetterFound(foundLetter);
+    } else if (letter.length > 1) {
+        longerWord(letter);
+    }
+}
+
+function usedLetters(letter) {
     var letterInsideArray = 0;
     for (var i = 0; i < letterIndex; ++i) {
         if (letter.localeCompare(wordLetters[i]) == 0) {
@@ -35,52 +90,13 @@ document.getElementById("enter").onclick = function() {
         ++letterIndex;
         document.getElementById("letters").innerHTML = 'These are the letters you used: ' + wordLetters;
     }
+}
+
+document.getElementById("enter").onclick = function() {
+    let letter = document.getElementById("input2").value;
+    usedLetters(letter);
     if (mistakes < 8) {
-        var foundLetter = 0;
-        if (letter != "" && letter.length == 1) {
-            for (var i = 0; i < myWord.length; ++i) {
-                if (myWord[i].localeCompare(letter) == 0) {
-                    foundLetter = 1;
-                    mysteriousWord = mysteriousWord.replaceAt(i * 2, letter);
-                }
-            }
-            if (foundLetter == 0) {
-                document.getElementById("input2").value = "";
-                ++mistakes;
-                changeImage(mistakes);
-            } else {
-                document.getElementById("paragraph").innerHTML = mysteriousWord;
-                document.getElementById("input2").value = "";
-                var isThisTheWord = 1;
-                for (var i = 0; i < myWord.length; ++i) {
-                    if (mysteriousWord[i * 2].localeCompare(myWord[i]) != 0) {
-                        isThisTheWord = 0;
-                    }
-                }
-                if (isThisTheWord) {
-                    alert('Congratulations!');
-                }
-            }
-        } else if (letter.length > 1) {
-            var correctWord = 1;
-            if (letter.length != myWord.length) {
-                correctWord = 0;
-            } else {
-                for (var i = 0; i < myWord.length; ++i) {
-                    if (letter[i].localeCompare(myWord[i]) != 0) {
-                        correctWord = 0;
-                    }
-                }
-            }
-            if (correctWord) {
-                alert('Congratulations!');
-                document.getElementById("paragraph").innerHTML = myWord;
-                document.getElementById("input2").value = "";
-            } else {
-                mistakes = 7;
-                changeImage(mistakes);
-            }
-        }
+        replacement(letter);
     }
 }
 

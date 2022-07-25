@@ -22,7 +22,7 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
 
-function longerWord(letter) {
+function thisCanBeYourWord(letter) {
     var correctWord = 1;
     if (letter.length != myWord.length) {
         correctWord = 0;
@@ -34,7 +34,7 @@ function longerWord(letter) {
         }
     }
     if (correctWord) {
-        alert('Congratulations!');
+        document.getElementById("winOrLose").innerHTML ='Congratulations!';
         document.getElementById("paragraph").innerHTML = myWord;
         document.getElementById("input2").value = "";
     } else {
@@ -58,12 +58,12 @@ function isTheLetterFound(foundLetter) {
             }
         }
         if (isThisTheWord) {
-            alert('Congratulations!');
+            document.getElementById("winOrLose").innerHTML ='Congratulations!';
         }
     }
 }
 
-function replacement(letter) {
+function closerToTheword(letter) {
     var foundLetter = 0;
     if (letter != "" && letter.length == 1) {
         for (var i = 0; i < myWord.length; ++i) {
@@ -74,7 +74,7 @@ function replacement(letter) {
         }
         isTheLetterFound(foundLetter);
     } else if (letter.length > 1) {
-        longerWord(letter);
+        thisCanBeYourWord(letter);
     }
 }
 
@@ -96,7 +96,7 @@ document.getElementById("enter").onclick = function() {
     let letter = document.getElementById("input2").value;
     usedLetters(letter);
     if (mistakes < 8) {
-        replacement(letter);
+        closerToTheword(letter);
     }
 }
 
@@ -115,8 +115,8 @@ function changeImage(mistakes) {
         document.getElementById("imgClickAndChange").src = "seven.jpg";
     } else if (mistakes == 7) {
         document.getElementById("imgClickAndChange").src = "eight.jpg";
-        alert('You lost!');
         document.getElementById("paragraph").innerHTML = myWord + ' - this was your word...';
         document.getElementById("input2").value = "";
+        document.getElementById("winOrLose").innerHTML ='Oops, you lost...';
     }
 }

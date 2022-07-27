@@ -15,6 +15,7 @@ document.getElementById("add").onclick = function() {
         }
         document.getElementById("paragraph").innerHTML = mysteriousWord;
         document.getElementById("input").value = "";
+        ++index;
     }
 }
 
